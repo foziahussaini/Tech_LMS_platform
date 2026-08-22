@@ -6,10 +6,10 @@
 }
 
 :root{
-    --bg-color: rgba(108, 144, 144, 0.753);
+    --bg-color: #0b768ea4;
     --font-family:  'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     --box-shadow: 0 3px 5px rgba(0, 0, 0, 0.15);
-    --bg2-color: rgb(249, 250, 250);
+    --mainBackground-color: #bad4db7a;
     --btn-color: rgba(151, 214, 159, 0.884);
     --border-radius: 0.3rem;
      --color-hover: rgba(151, 202, 195, 0.984);
@@ -23,6 +23,7 @@ body{
     display: flex;
     flex-direction: column;
     overflow-x: hidden;
+    background-color: var(--mainBackground-color);
 }
 
 header{
@@ -134,7 +135,7 @@ header{
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 3rem;
+    gap: 2rem;
 }
 
 .logo{
@@ -182,10 +183,10 @@ header{
     border-bottom: 2px solid rgba(108, 144, 144, 0.961);
 }
 
-/* why dynamix button */
-.dynamix-btn{
+/* why techlearn button */
+.techLearn-btn{
     width: 250px;
-    padding: 0.8rem;
+    padding: 0.5rem 0.8rem;
     margin-top: 1rem;
     margin-right: 9rem;
     display: flex;
@@ -195,7 +196,7 @@ header{
 
     >a{
         text-decoration: none;
-        font-size: 12px;
+        font-size: 10px;
         font-weight: 700;
         color: black;
     }
