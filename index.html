@@ -6,36 +6,51 @@
     <title>TechLearn LMS</title>
     <link rel="stylesheet" href="./css/index.css">
     <link rel="stylesheet" href="./css/register.css">
-    <link rel="stylesheet" href="./reponsive/indexresponsive.css">
-    <script defer src="./JS/language.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="./reponsive/index.css">
+    <script defer src="./javascript/language.js"></script>
+    <script defer type="module" src="./javascript/homepage.js"></script> 
+    <script defer type="module" src="./javascript/register.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+        integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
-<body>
+
+<body id="home">
     <!-- header part -->
     <header>
         <!-- subheader -->
         <div class="sub-header">
+            <!--  auth registration part -->
+            <div id="auth-container" style="position: relative; display: inline-block;">
+                <!-- Trigger Element -->
+                <a href="#" class="login">
+                    <i class="fa-solid fa-user"></i>
+                    <span">Login</span>
+                </a>
+
+                <!-- Dropdown aligned underneath -->
+                <div id="user-dropdown" class="user-dropdown ">
+                    <ul>
+                        <li id="user-email">Loading...</li>
+                        <li id="user-role">Loading...</li>
+
+                        <!-- Horizontal Rule always visible -->
+                        <hr>
+
+                        <li><a href="/account-settings.html" id="account-settings">Account Settings</a></li>
+                        <li><button id="sign-out">Log Out</button></li>
+                    </ul>
+                </div>
+            </div>
+
             <!-- language part apend here -->
-            <!--  login part -->
-            <div class="login" id="login">
-                <i class="fa-regular fa-user fa-xs" style="margin-top: 0.7rem;"></i>
-                <span data-translate data-key="login" class="user">log in</span>
-            </div>
-            <div class="user-dropdown" id="user-dropdown">
-                <ul id="user">
-                    <li id="user-email">example@gmail.com</li>
-                    <hr style="color: rgba(128, 128, 128, 0.066);">
-                    <li id="user-role">Student</li>
-                    <button id="sign-out">sign out</button>
-                </ul>
-            </div>
         </div>
         <!-- main header -->
         <div class="header-container">
-            <div class="logo">
-                <img src="./images/logo.lms.jpg" alt="">
+            <div class="logo-container">
+                <img id="logo" src="" alt="Brand Logo">
             </div>
-            <div class="navBar">
+            <div class="navBar-container">
                 <ul>
                     <li data-target="about" data-translate data-key="about">About</li>
                     <li data-target="explore" data-translate data-key="explore">Explore</li>
@@ -43,47 +58,63 @@
                     <li id="dashboard" data-translate data-key="dashboard">Dashboard</li>
                 </ul>
             </div>
-            <button class="techLearn-btn" id="techLearn-btn"><a href="#">Why TechLearn</a></button>
-            <div class="dropdown-details" id="dropdown-details"><p>Offers scalable IT, cloud, cybersecurity, and communication solutions, acting as a partner to adapt services as businesses grow, with personal, knowledgeable support.</p></div>
-            <div class="search-icon" id="searchIcon">
-                <svg xmlns="http://www.w3.org/2000/svg" height="14" width="14" viewBox="0 0 640 640"><path d="M480 272C480 317.9 465.1 360.3 440 394.7L566.6 521.4C579.1 533.9 579.1 554.2 566.6 566.7C554.1 579.2 533.8 579.2 521.3 566.7L394.7 440C360.3 465.1 317.9 480 272 480C157.1 480 64 386.9 64 272C64 157.1 157.1 64 272 64C386.9 64 480 157.1 480 272zM272 416C351.5 416 416 351.5 416 272C416 192.5 351.5 128 272 128C192.5 128 128 192.5 128 272C128 351.5 192.5 416 272 416z"/></svg>
+            <div class="actions-container">
+                <button class="techLearn-btn" id="techLearn-btn"><a href="#">Why TechLearn?</a></button>
+                <div class="dropdown-details" id="dropdown-details">
+                    <p>Offers scalable IT, cloud, cybersecurity, and communication solutions, acting as a partner to
+                        adapt services as businesses grow, with personal, knowledgeable support.</p>
+                </div>
+                <div class="search-icon" id="searchIcon">
+                    <svg xmlns="http://www.w3.org/2000/svg" height="14" width="14" viewBox="0 0 640 640">
+                        <path
+                            d="M480 272C480 317.9 465.1 360.3 440 394.7L566.6 521.4C579.1 533.9 579.1 554.2 566.6 566.7C554.1 579.2 533.8 579.2 521.3 566.7L394.7 440C360.3 465.1 317.9 480 272 480C157.1 480 64 386.9 64 272C64 157.1 157.1 64 272 64C386.9 64 480 157.1 480 272zM272 416C351.5 416 416 351.5 416 272C416 192.5 351.5 128 272 128C192.5 128 128 192.5 128 272C128 351.5 192.5 416 272 416z" />
+                    </svg>
+                </div>
+                <form class="seachbar" id="searchbardropdown">
+                    <input class="search" type="search" name="" id="search" placeholder="search...."
+                        onkeypress="clickEnter(event)">
+                </form>
             </div>
-            <form class="seachbar" id="searchbardropdown">
-                <input class="search" type="search" name="" id="search" placeholder="search...." onkeypress="clickEnter(event)">
-            </form>
         </div>
     </header>
     <!-- main body part -->
     <main class="main-container">
-    <!-- section one -->
+        <!-- section one -->
         <div class="section1">
             <div class="title">
-                <h1 data-translate data-key="title" >TechLearn</h1>
-                <h3 data-translate data-key="sub-title" >We are future-proofing<br> non-tech hiring with ownable <br>ideas and scable systems</h3>
-                <p data-translate data-key="sub-title2" >If you are tired of cookies-cutter roles and want to build something that <br>lasts, you are inthe right place.</p>
+                <h1 data-translate data-key="title">TechLearn</h1>
+                <h3 data-translate data-key="sub-title">We are future-proofing<br> non-tech hiring with ownable
+                    <br>ideas and scable systems
+                </h3>
+                <p data-translate data-key="sub-title2">If you are tired of cookies-cutter roles and want to build
+                    something that <br>lasts, you are inthe right place.</p>
                 <button id="services-btn" data-target="service" data-translate data-key="services">Our Services</button>
             </div>
             <div class="image">
-                <img src="./images/lMS image1.jpg" alt="">
+                <img src="" id="hero-banner" alt="hero-section">
             </div>
         </div>
-    <!-- section two -->
+        <!-- section two -->
         <div class="section2">
             <h4 id="about" data-translate data-key="about_us">About Us</h4>
             <p>
                 At Dynamix Networks, we specialize in building bold, human-centered solutions for real-world challenges.
                 Whether it’s crafting standout brand identities, designing independent intern projects, or reimagining
-                how tech talent is discovered and empowered, we believe in originality over convention and clarity over complexity.
-                <br><br><span style="font-size: larger;">Mission: </span><br>create systems that scale, stories that stick, and experiences 
-                that leave a mark. We work with interns, creatives, and professionals who crave autonomy, impact, and a chance 
+                how tech talent is discovered and empowered, we believe in originality over convention and clarity over
+                complexity.
+                <br><br><span style="font-size: larger;">Mission: </span><br>create systems that scale, stories that
+                stick, and experiences
+                that leave a mark. We work with interns, creatives, and professionals who crave autonomy, impact, and a
+                chance
                 to build something truly portfolio-worthy.
             </p>
         </div>
-    <!-- section three -->
+        <!-- section three -->
         <div class="section3">
             <div class="topic">
                 <h1 data-translate data-key="learn_skills">Learn essential career and life skills</h1>
-                <p data-translate data-key="learn_text">helps you build in-demand skills fast and advance your career in a changing job market.</p>
+                <p data-translate data-key="learn_text">helps you build in-demand skills fast and advance your career in
+                    a changing job market.</p>
             </div>
             <div class="courses">
                 <div class="cousre1 card">
@@ -101,12 +132,13 @@
                     </div>
                 </div>
                 <div class="course3 card">
-                    <div class="card-img"><img src="c:\Users\Ali\OneDrive - Viken fylkeskommune\Bilder\developement.jpg" alt=""></div>
+                    <div class="card-img"><img src="c:\Users\Ali\OneDrive - Viken fylkeskommune\Bilder\developement.jpg"
+                            alt=""></div>
                     <div class="card-name">
                         <span data-translate class="name">Development</span>
                         <span class="arrow">&#8594;</span>
                     </div>
-                </div>   
+                </div>
                 <div class="course4 card">
                     <div class="card-img"><img src="./images/digitalm.jpg" alt=""></div>
                     <div class="card-name">
@@ -132,9 +164,10 @@
                 <button class="icon-btn" id="next"><i class="fa-solid fa-angle-right"></i></button>
             </div>
         </div>
-    <!-- section four -->
+        <!-- section four -->
         <div class="section4">
-            <h2 data-translate data-translate data-key="plan-title" class="plan-title">Choose the Right Development Plan for success</h2>
+            <h2 data-translate data-translate data-key="plan-title" class="plan-title">Choose the Right Development Plan
+                for success</h2>
             <div id="explore" class="plans">
                 <div class="Fundamentals skills">
                     <div class="cost">
@@ -194,12 +227,13 @@
                         </li>
                         <li>
                             <input type="checkbox" name="" id="">Resume and Portfolio building projects
-                        ></li>
+                            >
+                        </li>
                     </div>
                 </div>
                 <div class="Mastery skills">
                     <div class="cost">
-                        <div class="cost-detail"style=" display:flex; flex-direction: column; gap: 0.8rem;">
+                        <div class="cost-detail" style=" display:flex; flex-direction: column; gap: 0.8rem;">
                             <h2>Career Plus</h2>
                             <p>Started from 85$</p>
                         </div>
@@ -228,13 +262,14 @@
                 </div>
             </div>
         </div>
-    <!-- section five -->
+        <!-- section five -->
         <div class="section5">
             <h1 data-translate data-key="questions">Questions or concerns?</h1>
             <p data-translate data-key="">Please contact the Dynamix Networks team via email.</p>
-            <button class="emailbtn" id="emailbtn" data-target="email"><a href="mailto:" data-translate data-key="email-us">EMAIL US</a></button>
+            <button class="emailbtn" id="emailbtn" data-target="email"><a href="mailto:" data-translate
+                    data-key="email-us">EMAIL US</a></button>
         </div>
-    <!-- section six -->
+        <!-- section six -->
         <div class="section6" id="courses-field">
             <h2 data-translate data-key="section-title">Life-changing skills to elevate your career</h2>
             <div class="course-names" id="all-fields">
@@ -245,299 +280,332 @@
                 <button class="field">Mobile App Developement</button>
             </div>
             <div class="all-subjects" id="all-subjects">
-            <!-- AI Fundamentals -->
-            <div class="subjects first">
-                <div class="sub sub1" data-id="AI-agent" data-title="Intro-to-AI-Agents" data-image="./images/Agent.jpg" data-price="$10.99">
-                    <img src="./images/Agent.jpg" alt="">
-                    <h4>Intro to AI Agents and Agentic AI</h4>
-                    <div class="enroll-btn">
-                        <p>$10.99</p>
-                        <button class="enrolled-btn">Enroll</button>
+                <!-- AI Fundamentals -->
+                <div class="subjects first">
+                    <div class="sub sub1" data-id="AI-agent" data-title="Intro-to-AI-Agents"
+                        data-image="./images/Agent.jpg" data-price="$10.99">
+                        <img src="./images/Agent.jpg" alt="">
+                        <h4>Intro to AI Agents and Agentic AI</h4>
+                        <div class="enroll-btn">
+                            <p>$10.99</p>
+                            <button class="enrolled-btn">Enroll</button>
+                        </div>
+                    </div>
+                    <div class="sub sub2" data-id="AI-chatbot" data-title="AI-chatbot"
+                        data-image="./images/intro_AI.jpg" data-price="$8.99">
+                        <img src="./images/intro_AI.jpg" alt="">
+                        <h4>Intro to AI Chatbot</h4>
+                        <div class="enroll-btn">
+                            <p>$8.99</p>
+                            <button class="enrolled-btn">Enroll</button>
+                        </div>
+                    </div>
+                    <div class="sub sub3" data-id="detection" data-title="AI-cyberSecurity"
+                        data-image="./images/cyber.jpg" data-price="$75.99">
+                        <img src="./images/cyber.jpg" alt="">
+                        <h4>AI for Cyber-Security: Threat Detection</h4>
+                        <div class="enroll-btn" style="margin-top: 0;">
+                            <p>$75.99</p>
+                            <button class="enrolled-btn">Enroll</button>
+                        </div>
+                    </div>
+                    <div class="sub sub4" data-id="Masterclass" data-title="AI-Msaterclass"
+                        data-image="./images/AI-master.jpg" data-price="$98.99">
+                        <img src="./images/AI-master.jpg" alt="">
+                        <h4>AI Masterclass for Non-Thechnical professionals</h4>
+                        <div class="enroll-btn" style="margin-top: 0;">
+                            <p>$98.99</p>
+                            <button class="enrolled-btn">Enroll</button>
+                        </div>
+                    </div>
+                    <div class="sub sub5" data-id="AI-pharma-biothec" data-title="AI-pharma-biothec"
+                        data-image="./images/visualize.jpg" data-price="$18.9">
+                        <img src="./images/visualize.jpg" alt="">
+                        <h4>Computer System Validation+ AI Basic(Pharma & Biothech)</h4>
+                        <div class="enroll-btn" style="margin-top: 0;">
+                            <p>$18.9</p>
+                            <button class="enrolled-btn">Enroll</button>
+                        </div>
+                    </div>
+                    <div class="sub sub6" data-id="Ai-security" data-title="Ai-security"
+                        data-image="./images/Ai-security.jpg" data-price="$38.9">
+                        <img src="./images/Ai-security.jpg" alt="">
+                        <h4>AI Security</h4>
+                        <div class="enroll-btn" style="margin-top: 0;">
+                            <p>$38.9</p>
+                            <button class="enrolled-btn">Enroll</button>
+                        </div>
+                    </div>
+                    <div class="sub sub7" data-id="AI-real-world" data-title="AI-real-world"
+                        data-image="./images/AI-agent.png" data-price="$38.9">
+                        <img src="./images/AI-agent.png" alt="">
+                        <h4>AI in real-world Aplication</h4>
+                        <div class="enroll-btn" style="margin-top: 0;">
+                            <p>$38.9</p>
+                            <button class="enrolled-btn">Enroll</button>
+                        </div>
+                    </div>
+                    <div class="sub sub7" data-id="Ethic" data-title="Ethic" data-image="./images/Ethic.jpg"
+                        data-price="$38.9">
+                        <img src="./images/Ethic.jpg" alt="">
+                        <h4>Ethics and Responsible AI</h4>
+                        <div class="enroll-btn" style="margin-top: 0;">
+                            <p>$38.9</p>
+                            <button class="enrolled-btn">Enroll</button>
+                        </div>
                     </div>
                 </div>
-                <div class="sub sub2" data-id="AI-chatbot" data-title="AI-chatbot" data-image="./images/intro_AI.jpg" data-price="$8.99">
-                    <img src="./images/intro_AI.jpg" alt="">
-                    <h4>Intro to AI Chatbot</h4>
-                    <div class="enroll-btn">
-                        <p>$8.99</p>
-                        <button class="enrolled-btn">Enroll</button>
+                <!-- Data Science -->
+                <div class="subjects Second">
+                    <div class="sub sub1" data-id="machine-learning" data-title="machine-learning"
+                        data-image="./images/ML.jpg" data-price="$98.99">
+                        <img src="./images/ML.jpg" alt="">
+                        <h4>Machine learning</h4>
+                        <div class="enroll-btn" style="margin-top: 0;">
+                            <p>$98.99</p>
+                            <button class="enrolled-btn">Enroll</button>
+                        </div>
+                    </div>
+                    <div class="sub sub2" data-id="python" data-title="python" data-image="./images/python.jpg"
+                        data-price="$98.99">
+                        <img src="./images/python.jpg" alt="">
+                        <h4>Python Programming</h4>
+                        <div class="enroll-btn" style="margin-top: 0;">
+                            <p>$98.99</p>
+                            <button class="enrolled-btn">Enroll</button>
+                        </div>
+                    </div>
+                    <div class="sub sub3" data-id="data-visualization" data-title="data-visualization"
+                        data-image="./images/data-visual.jpg" data-price="$98.99">
+                        <img src="./images/data-visual.jpg" alt="">
+                        <h4>Data Visualization</h4>
+                        <div class="enroll-btn" style="margin-top: 0;">
+                            <p>$98.99</p>
+                            <button class="enrolled-btn">Enroll</button>
+                        </div>
+                    </div>
+                    <div class="sub sub4" data-id="data-analysis" data-title="data-analysis"
+                        data-image="./images/data-analysis.jpg" data-price="$98.99">
+                        <img src="./images/data-analysis.jpg" alt="">
+                        <h4>Data Analysis</h4>
+                        <div class="enroll-btn" style="margin-top: 0;">
+                            <p>$98.99</p>
+                            <button class="enrolled-btn">Enroll</button>
+                        </div>
+                    </div>
+                    <div class="sub sub5" data-id="SQL" data-title="SQL" data-image="./images/SQL.jpg"
+                        data-price="$98.99">
+                        <img src="./images/SQL.jpg" alt="">
+                        <h4>SQL $ Databases</h4>
+                        <div class="enroll-btn" style="margin-top: 0;">
+                            <p>$98.99</p>
+                            <button class="enrolled-btn">Enroll</button>
+                        </div>
+                    </div>
+                    <div class="sub sub6" data-id="big-data" data-title="big-data" data-image="./images/big-data.jpg"
+                        data-price="$98.99">
+                        <img src="./images/big-data.jpg" alt="">
+                        <h4>Big Data Fundamentals</h4>
+                        <div class="enroll-btn" style="margin-top: 0;">
+                            <p>$98.99</p>
+                            <button class="enrolled-btn">Enroll</button>
+                        </div>
+                    </div>
+                    <div class="sub sub7" data-id="statistic" data-title="statistic" data-image="./images/statistic.jpg"
+                        data-price="$54.99">
+                        <img src="./images/statistic.jpg" alt="">
+                        <h4>Statistics and Probability</h4>
+                        <div class="enroll-btn" style="margin-top: 0;">
+                            <p>$54.99</p>
+                            <button class="enrolled-btn">Enroll</button>
+                        </div>
                     </div>
                 </div>
-                <div class="sub sub3" data-id="detection" data-title="AI-cyberSecurity" data-image="./images/cyber.jpg" data-price="$75.99">
-                    <img src="./images/cyber.jpg" alt="">
-                    <h4>AI for Cyber-Security: Threat Detection</h4>
-                    <div class="enroll-btn" style="margin-top: 0;">
-                        <p>$75.99</p>
-                        <button class="enrolled-btn">Enroll</button>
+                <!-- Developement -->
+                <div class="subjects third" data-id="html" data-title="html" data-image="./images/HTML.jpg"
+                    data-price="$98.99">
+                    <div class="sub sub1">
+                        <img src="./images/HTML.jpg" alt="">
+                        <h4>HTML5 & CSS3</h4>
+                        <div class="enroll-btn" style="margin-top: 0;">
+                            <p>$98.99</p>
+                            <button class="enrolled-btn">Enroll</button>
+                        </div>
+                    </div>
+                    <div class="sub sub2" data-id="tailwind" data-title="tailwind" data-image="./images/tailwind.jpg"
+                        data-price="$98.99">
+                        <img src="./images/tailwind.jpg" alt="">
+                        <h4>Tailwind CSS</h4>
+                        <div class="enroll-btn" style="margin-top: 0;">
+                            <p>$98.99</p>
+                            <button class="enrolled-btn">Enroll</button>
+                        </div>
+                    </div>
+                    <div class="sub sub3" data-id="JavaScript-fundamental" data-title="JavaScript-fundamental"
+                        data-image="./images/AI-master.jpg" data-price="$18.99">
+                        <img src="./images/AI-master.jpg" alt="">
+                        <h4>JavaScript (fundamental)</h4>
+                        <div class="enroll-btn" style="margin-top: 0;">
+                            <p>$18.99</p>
+                            <button class="enrolled-btn">Enroll</button>
+                        </div>
+                    </div>
+                    <div class="sub sub4" data-id="cloud-computing" data-title="cloud-computing"
+                        data-image="./images/cloud.jpg" data-price="$98.99">
+                        <img src="./images/cloud.jpg" alt="">
+                        <h4>Cloud Computing Fundamental</h4>
+                        <div class="enroll-btn" style="margin-top: 0;">
+                            <p>$98.99</p>
+                            <button class="enrolled-btn">Enroll</button>
+                        </div>
+                    </div>
+                    <div class="sub sub5" data-id="project-based" data-title="Project-Based"
+                        data-image="./images/project-based.jpg" data-price="$8.99">
+                        <img src="./images/project-based.jpg" alt="">
+                        <h4>Project-Based Developement</h4>
+                        <div class="enroll-btn" style="margin-top: 0;">
+                            <p>$8.99</p>
+                            <button class="enrolled-btn">Enroll</button>
+                        </div>
+                    </div>
+                    <div class="sub sub6" data-id="reactjs" data-title="reactjs" data-image="./images/reactjs.jpg"
+                        data-price="$68.99">
+                        <img src="./images/reactjs.jpg" alt="">
+                        <h4>React.js</h4>
+                        <div class="enroll-btn" style="margin-top: 0;">
+                            <p>$68.99</p>
+                            <button class="enrolled-btn">Enroll</button>
+                        </div>
+                    </div>
+                    <div class="sub sub7" data-id="ux-design" data-title="ux-design" data-image="./images/ux-design.png"
+                        data-price="$28.99">
+                        <img src="./images/ux-design.png" alt="">
+                        <h4>UI/UX Basic</h4>
+                        <div class="enroll-btn" style="margin-top: 0;">
+                            <p>$28.99</p>
+                            <button class="enrolled-btn">Enroll</button>
+                        </div>
+                    </div>
+                    <div class="sub sub8" data-id="node.js" data-title="node.js" data-image="./images/node.png"
+                        data-price="$98.99">
+                        <img src="./images/node.png" alt="">
+                        <h4>Node.js</h4>
+                        <div class="enroll-btn" style="margin-top: 0;">
+                            <p>$98.99</p>
+                            <button class="enrolled-btn">Enroll</button>
+                        </div>
+                    </div>
+                    <div class="sub sub9" data-id="agile-basic" data-title="agile-basic" data-image="./images/agile.png"
+                        data-price="$98.99">
+                        <img src="./images/agile.png" alt="">
+                        <h4>Agile and Scrum Basics</h4>
+                        <div class="enroll-btn" style="margin-top: 0;">
+                            <p>$98.99</p>
+                            <button class="enrolled-btn">Enroll</button>
+                        </div>
+                    </div>
+                    <div class="sub sub9" data-id="JavaScript" data-title="JavaScript" data-image="./images/vanilla.jpg"
+                        data-price="$98.99">
+                        <img src="./images/vanilla.jpg" alt="">
+                        <h4>Vanilla JavaScript</h4>
+                        <div class="enroll-btn" style="margin-top: 0;">
+                            <p>$98.99</p>
+                            <button class="enrolled-btn">Enroll</button>
+                        </div>
                     </div>
                 </div>
-                <div class="sub sub4" data-id="Masterclass" data-title="AI-Msaterclass" data-image="./images/AI-master.jpg" data-price="$98.99">
-                    <img src="./images/AI-master.jpg" alt="">
-                    <h4>AI Masterclass for Non-Thechnical professionals</h4>
-                    <div class="enroll-btn" style="margin-top: 0;">
-                        <p>$98.99</p>
-                        <button class="enrolled-btn">Enroll</button>
+                <!-- Digital Marketing-->
+                <div class="subjects fourt">
+                    <div class="sub sub1" data-id="intro-digital-marketing" data-title="intro-digital-marketing"
+                        data-image="./images/digital-marketing.jpg" data-price="$98.99">
+                        <img src="./images/digital-marketing.jpg" alt="">
+                        <h4>Introduction to Digital Marketing</h4>
+                        <div class="enroll-btn" style="margin-top: 0;">
+                            <p>$98.99</p>
+                            <button class="enrolled-btn">Enroll</button>
+                        </div>
+                    </div>
+                    <div class="sub sub2" data-id="content-marketing" data-title="content-marketing"
+                        data-image="./images/Content.jpg" data-price="$98.99">
+                        <img src="./images/Content.jpg" alt="">
+                        <h4>Content Marketing</h4>
+                        <div class="enroll-btn" style="margin-top: 0;">
+                            <p>$98.99</p>
+                            <button class="enrolled-btn">Enroll</button>
+                        </div>
+                    </div>
+                    <div class="sub sub3" data-id="search-engine" data-title="search-engine"
+                        data-image="./images/search-engine.png" data-price="$98.99">
+                        <img src="./images/search-engine.png" alt="">
+                        <h4>Search Engine Marketing</h4>
+                        <div class="enroll-btn" style="margin-top: 0;">
+                            <p>$98.99</p>
+                            <button class="enrolled-btn">Enroll</button>
+                        </div>
+                    </div>
+                    <div class="sub sub4" data-id="Influencer" data-title="Influencer"
+                        data-image="./images/affiliate.png" data-price="$98.99">
+                        <img src="./images/affiliate.png" alt="">
+                        <h4>Affiliate & Influencer Marketing</h4>
+                        <div class="enroll-btn" style="margin-top: 0;">
+                            <p>$98.99</p>
+                            <button class="enrolled-btn">Enroll</button>
+                        </div>
+                    </div>
+                    <div class="sub sub5" data-id="E-Commerce-marketing" data-title="E-Commerce-marketing"
+                        data-image="./images/E-commerce.jpg" data-price="$98.99">
+                        <img src="./images/E-commerce.jpg" alt="">
+                        <h4>E-Commerce Marketing</h4>
+                        <div class="enroll-btn" style="margin-top: 0;">
+                            <p>$98.99</p>
+                            <button class="enrolled-btn">Enroll</button>
+                        </div>
                     </div>
                 </div>
-                <div class="sub sub5" data-id="AI-pharma-biothec" data-title="AI-pharma-biothec" data-image="./images/visualize.jpg" data-price="$18.9">
-                    <img src="./images/visualize.jpg" alt="">
-                    <h4>Computer System Validation+ AI Basic(Pharma & Biothech)</h4>
-                    <div class="enroll-btn" style="margin-top: 0;">
-                        <p>$18.9</p>
-                        <button class="enrolled-btn">Enroll</button>
+                <!-- Mobile App Developement-->
+                <div class="subjects sixth">
+                    <div class="sub sub1" data-id="dart" data-title="dart" data-image="./images/dart.jpg"
+                        data-price="$98.99">
+                        <img src="./images/dart.jpg" alt="">
+                        <h4>Dart Programming</h4>
+                        <div class="enroll-btn" style="margin-top: 0;">
+                            <p>$98.99</p>
+                            <button class="enrolled-btn">Enroll</button>
+                        </div>
                     </div>
-                </div>
-                <div class="sub sub6" data-id="Ai-security" data-title="Ai-security" data-image="./images/Ai-security.jpg" data-price="$38.9">
-                    <img src="./images/Ai-security.jpg" alt="">
-                    <h4>AI Security</h4>
-                    <div class="enroll-btn" style="margin-top: 0;">
-                        <p>$38.9</p>
-                        <button class="enrolled-btn">Enroll</button>
+                    <div class="sub sub2" data-id="" data-title="" data-image="" data-price="">
+                        <img src="./images/flutter.jpg" alt="">
+                        <h4>Flutter for beginner</h4>
+                        <div class="enroll-btn" style="margin-top: 0;">
+                            <p>$98.99</p>
+                            <button class="enrolled-btn">Enroll</button>
+                        </div>
                     </div>
-                </div>
-                <div class="sub sub7" data-id="AI-real-world" data-title="AI-real-world" data-image="./images/AI-agent.png" data-price="$38.9">
-                    <img src="./images/AI-agent.png" alt="">
-                    <h4>AI in real-world Aplication</h4>
-                    <div class="enroll-btn" style="margin-top: 0;">
-                        <p>$38.9</p>
-                        <button class="enrolled-btn">Enroll</button>
+                    <div class="sub sub3" data-id="firebase" data-title="firebase" data-image="./images/firebase.jpg"
+                        data-price="$98.99">
+                        <img src="./images/firebase.jpg" alt="">
+                        <h4>Firebase For Mobile App</h4>
+                        <div class="enroll-btn" style="margin-top: 0;">
+                            <p>$98.99</p>
+                            <button class="enrolled-btn">Enroll</button>
+                        </div>
                     </div>
-                </div>
-                <div class="sub sub7" data-id="Ethic" data-title="Ethic" data-image="./images/Ethic.jpg" data-price="$38.9">
-                    <img src="./images/Ethic.jpg" alt="">
-                    <h4>Ethics and Responsible AI</h4>
-                    <div class="enroll-btn" style="margin-top: 0;">
-                        <p>$38.9</p>
-                        <button class="enrolled-btn">Enroll</button>
+                    <div class="sub sub4" data-id="react-native" data-title="react-native"
+                        data-image="./images/react-native.png" data-price="$98.99">
+                        <img src="./images/react-native.png" alt="">
+                        <h4>React Native</h4>
+                        <div class="enroll-btn" style="margin-top: 0;">
+                            <p>$98.99</p>
+                            <button class="enrolled-btn">Enroll</button>
+                        </div>
                     </div>
                 </div>
             </div>
-            <!-- Data Science -->
-            <div class="subjects Second">
-                <div class="sub sub1" data-id="machine-learning" data-title="machine-learning" data-image="./images/ML.jpg" data-price="$98.99">
-                    <img src="./images/ML.jpg" alt="">
-                    <h4>Machine learning</h4>
-                    <div class="enroll-btn" style="margin-top: 0;">
-                        <p>$98.99</p>
-                        <button class="enrolled-btn">Enroll</button>
-                    </div>
-                </div>
-                <div class="sub sub2" data-id="python" data-title="python" data-image="./images/python.jpg" data-price="$98.99">
-                    <img src="./images/python.jpg" alt="">
-                    <h4>Python Programming</h4>
-                    <div class="enroll-btn" style="margin-top: 0;">
-                        <p>$98.99</p>
-                        <button class="enrolled-btn">Enroll</button>
-                    </div>
-                </div>
-                <div class="sub sub3" data-id="data-visualization" data-title="data-visualization" data-image="./images/data-visual.jpg" data-price="$98.99">
-                    <img src="./images/data-visual.jpg" alt="">
-                    <h4>Data Visualization</h4>
-                    <div class="enroll-btn" style="margin-top: 0;">
-                        <p>$98.99</p>
-                        <button class="enrolled-btn">Enroll</button>
-                    </div>
-                </div>
-                <div class="sub sub4" data-id="data-analysis" data-title="data-analysis" data-image="./images/data-analysis.jpg" data-price="$98.99">
-                    <img src="./images/data-analysis.jpg" alt="">
-                    <h4>Data Analysis</h4>
-                    <div class="enroll-btn" style="margin-top: 0;">
-                        <p>$98.99</p>
-                        <button class="enrolled-btn">Enroll</button>
-                    </div>
-                </div>
-                <div class="sub sub5" data-id="SQL" data-title="SQL" data-image="./images/SQL.jpg" data-price="$98.99">
-                    <img src="./images/SQL.jpg" alt="">
-                    <h4>SQL $ Databases</h4>
-                    <div class="enroll-btn" style="margin-top: 0;">
-                        <p>$98.99</p>
-                        <button class="enrolled-btn">Enroll</button>
-                    </div>
-                </div>
-                <div class="sub sub6" data-id="big-data" data-title="big-data" data-image="./images/big-data.jpg" data-price="$98.99">
-                    <img src="./images/big-data.jpg" alt="">
-                    <h4>Big Data Fundamentals</h4>
-                    <div class="enroll-btn" style="margin-top: 0;">
-                        <p>$98.99</p>
-                        <button class="enrolled-btn">Enroll</button>
-                    </div>
-                </div>
-                <div class="sub sub7" data-id="statistic" data-title="statistic" data-image="./images/statistic.jpg" data-price="$54.99">
-                    <img src="./images/statistic.jpg" alt="">
-                    <h4>Statistics and Probability</h4>
-                    <div class="enroll-btn" style="margin-top: 0;">
-                        <p>$54.99</p>
-                        <button class="enrolled-btn">Enroll</button>
-                    </div>
-                </div>
+            <!-- previous and next buttons -->
+            <div class="btn">
+                <button class="prev-subjects"><i class="fa-solid fa-angle-left"></i></button>
+                <button class="next-subjects"><i class="fa-solid fa-angle-right"></i></button>
             </div>
-            <!-- Developement -->
-            <div class="subjects third" data-id="html" data-title="html" data-image="./images/HTML.jpg" data-price="$98.99">
-                <div class="sub sub1">
-                    <img src="./images/HTML.jpg" alt="">
-                    <h4>HTML5 & CSS3</h4>
-                    <div class="enroll-btn" style="margin-top: 0;">
-                        <p>$98.99</p>
-                        <button class="enrolled-btn">Enroll</button>
-                    </div>
-                </div>
-                <div class="sub sub2" data-id="tailwind" data-title="tailwind" data-image="./images/tailwind.jpg" data-price="$98.99">
-                    <img src="./images/tailwind.jpg" alt="">
-                    <h4>Tailwind CSS</h4>
-                    <div class="enroll-btn" style="margin-top: 0;">
-                        <p>$98.99</p>
-                        <button class="enrolled-btn">Enroll</button>
-                    </div>
-                </div>
-                <div class="sub sub3" data-id="JavaScript-fundamental" data-title="JavaScript-fundamental" data-image="./images/AI-master.jpg" data-price="$18.99">
-                    <img src="./images/AI-master.jpg" alt="">
-                    <h4>JavaScript (fundamental)</h4>
-                    <div class="enroll-btn" style="margin-top: 0;">
-                        <p>$18.99</p>
-                        <button class="enrolled-btn">Enroll</button>
-                    </div>
-                </div>
-                <div class="sub sub4" data-id="cloud-computing" data-title="cloud-computing" data-image="./images/cloud.jpg" data-price="$98.99">
-                    <img src="./images/cloud.jpg" alt="">
-                    <h4>Cloud Computing Fundamental</h4>
-                    <div class="enroll-btn" style="margin-top: 0;">
-                        <p>$98.99</p>
-                        <button class="enrolled-btn">Enroll</button>
-                    </div>
-                </div>
-                <div class="sub sub5" data-id="project-based" data-title="Project-Based" data-image="./images/project-based.jpg" data-price="$8.99">
-                    <img src="./images/project-based.jpg" alt="">
-                    <h4>Project-Based Developement</h4>
-                    <div class="enroll-btn" style="margin-top: 0;">
-                        <p>$8.99</p>
-                        <button class="enrolled-btn">Enroll</button>
-                    </div>
-                </div>
-                <div class="sub sub6" data-id="reactjs" data-title="reactjs" data-image="./images/reactjs.jpg" data-price="$68.99">
-                    <img src="./images/reactjs.jpg" alt="">
-                    <h4>React.js</h4>
-                    <div class="enroll-btn" style="margin-top: 0;">
-                        <p>$68.99</p>
-                        <button class="enrolled-btn">Enroll</button>
-                    </div>
-                </div>
-                <div class="sub sub7" data-id="ux-design" data-title="ux-design" data-image="./images/ux-design.png" data-price="$28.99">
-                    <img src="./images/ux-design.png" alt="">
-                    <h4>UI/UX Basic</h4>
-                    <div class="enroll-btn" style="margin-top: 0;">
-                        <p>$28.99</p>
-                        <button class="enrolled-btn">Enroll</button>
-                    </div>
-                </div>
-                <div class="sub sub8" data-id="node.js" data-title="node.js" data-image="./images/node.png" data-price="$98.99">
-                    <img src="./images/node.png" alt="">
-                    <h4>Node.js</h4>
-                    <div class="enroll-btn" style="margin-top: 0;">
-                        <p>$98.99</p>
-                        <button class="enrolled-btn">Enroll</button>
-                    </div>
-                </div>
-                <div class="sub sub9" data-id="agile-basic" data-title="agile-basic" data-image="./images/agile.png" data-price="$98.99">
-                    <img src="./images/agile.png" alt="">
-                    <h4>Agile and Scrum Basics</h4>
-                    <div class="enroll-btn" style="margin-top: 0;">
-                        <p>$98.99</p>
-                        <button class="enrolled-btn">Enroll</button>
-                    </div>
-                </div>
-                <div class="sub sub9" data-id="JavaScript" data-title="JavaScript" data-image="./images/vanilla.jpg" data-price="$98.99">
-                    <img src="./images/vanilla.jpg" alt="">
-                    <h4>Vanilla JavaScript</h4>
-                    <div class="enroll-btn" style="margin-top: 0;">
-                        <p>$98.99</p>
-                        <button class="enrolled-btn">Enroll</button>
-                    </div>
-                </div>
-            </div>
-            <!-- Digital Marketing-->
-            <div class="subjects fourt">
-                <div class="sub sub1" data-id="intro-digital-marketing" data-title="intro-digital-marketing" data-image="./images/digital-marketing.jpg" data-price="$98.99">
-                    <img src="./images/digital-marketing.jpg" alt="">
-                    <h4>Introduction to Digital Marketing</h4>
-                    <div class="enroll-btn" style="margin-top: 0;">
-                        <p>$98.99</p>
-                        <button class="enrolled-btn">Enroll</button>
-                    </div>
-                </div>
-                <div class="sub sub2" data-id="content-marketing" data-title="content-marketing" data-image="./images/Content.jpg" data-price="$98.99">
-                    <img src="./images/Content.jpg" alt="">
-                    <h4>Content Marketing</h4>
-                    <div class="enroll-btn" style="margin-top: 0;">
-                        <p>$98.99</p>
-                        <button class="enrolled-btn">Enroll</button>
-                    </div>
-                </div>
-                <div class="sub sub3" data-id="search-engine" data-title="search-engine" data-image="./images/search-engine.png" data-price="$98.99">
-                    <img src="./images/search-engine.png" alt="">
-                    <h4>Search Engine Marketing</h4>
-                    <div class="enroll-btn" style="margin-top: 0;">
-                        <p>$98.99</p>
-                        <button class="enrolled-btn">Enroll</button>
-                    </div>
-                </div>
-                <div class="sub sub4" data-id="Influencer" data-title="Influencer" data-image="./images/affiliate.png" data-price="$98.99">
-                    <img src="./images/affiliate.png" alt="">
-                    <h4>Affiliate & Influencer Marketing</h4>
-                    <div class="enroll-btn" style="margin-top: 0;">
-                        <p>$98.99</p>
-                        <button class="enrolled-btn">Enroll</button>
-                    </div>
-                </div>
-                <div class="sub sub5" data-id="E-Commerce-marketing" data-title="E-Commerce-marketing" data-image="./images/E-commerce.jpg" data-price="$98.99">
-                    <img src="./images/E-commerce.jpg" alt="">
-                    <h4>E-Commerce Marketing</h4>
-                    <div class="enroll-btn" style="margin-top: 0;">
-                        <p>$98.99</p>
-                        <button class="enrolled-btn">Enroll</button>
-                    </div>
-                </div>
-            </div>
-            <!-- Mobile App Developement-->
-            <div class="subjects sixth">
-                <div class="sub sub1" data-id="dart" data-title="dart" data-image="./images/dart.jpg" data-price="$98.99">
-                    <img src="./images/dart.jpg" alt="">
-                    <h4>Dart Programming</h4>
-                    <div class="enroll-btn" style="margin-top: 0;">
-                        <p>$98.99</p>
-                        <button class="enrolled-btn">Enroll</button>
-                    </div>
-                </div>
-                <div class="sub sub2" data-id="" data-title="" data-image="" data-price="">
-                    <img src="./images/flutter.jpg" alt="">
-                    <h4>Flutter for beginner</h4>
-                    <div class="enroll-btn" style="margin-top: 0;">
-                        <p>$98.99</p>
-                        <button class="enrolled-btn">Enroll</button>
-                    </div>
-                </div>
-                <div class="sub sub3" data-id="firebase" data-title="firebase" data-image="./images/firebase.jpg" data-price="$98.99">
-                    <img src="./images/firebase.jpg" alt="">
-                    <h4>Firebase For Mobile App</h4>
-                    <div class="enroll-btn" style="margin-top: 0;">
-                        <p>$98.99</p>
-                        <button class="enrolled-btn">Enroll</button>
-                    </div>
-                </div>
-                <div class="sub sub4" data-id="react-native" data-title="react-native" data-image="./images/react-native.png" data-price="$98.99">
-                    <img src="./images/react-native.png" alt="">
-                    <h4>React Native</h4>
-                    <div class="enroll-btn" style="margin-top: 0;">
-                        <p>$98.99</p>
-                        <button class="enrolled-btn">Enroll</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-          <!-- previous and next buttons -->
-        <div class="btn">
-            <button class="prev-subjects"><i class="fa-solid fa-angle-left"></i></button>
-            <button class="next-subjects"><i class="fa-solid fa-angle-right"></i></button>
-        </div>
         </div>
     </main>
     <!-- footer part -->
@@ -571,11 +639,10 @@
             </div>
             <!-- copyright -->
             <div class="copyright">
-                <p>&copy; 2024 Dynamix Networks. All rights reserved.</p>
+                <p>&copy; 2025 TechLearn LMS. All rights reserved.</p>
             </div>
         </div>
     </footer>
-
-    <script src="./JS/homepage.js"></script>
 </body>
+
 </html>

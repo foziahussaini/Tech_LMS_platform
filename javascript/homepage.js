@@ -1,4 +1,186 @@
 
+import IMAGES from "./assets.js"; 
+
+document.addEventListener("DOMContentLoaded", () => {
+/// ============================IMAGE PATH========================
+
+  const logoImg = document.getElementById("logo");
+  const profileImage = document.getElementById("profile");
+  const heroBannerImg = document.getElementById("hero-banner");
+
+  if(logoImg) logoImg.src = IMAGES.logo;
+  if(heroBannerImg) heroBannerImg.src = IMAGES.sectionOneHeroBanner; 
+  if(profileImage) profileImage.src = IMAGES.userDefaultAvatarMale;
+
+
+/// ---------------- Authentication User Log In / Sign Up ----------------
+    const authContainer = document.getElementById('auth-container');
+    const loginTrigger = document.querySelector('.login');
+    
+    // Dropdown elements
+    const dropdownMenu = document.getElementById('user-dropdown'); 
+    const emailLi = document.getElementById('user-email');
+    const roleLi = document.getElementById('user-role');
+    const signOutBtn = document.getElementById('sign-out');
+
+
+    // Simulated Backend Session
+    const userSession = {
+        isLoggedIn: true,         
+        hasAccount: true,          
+        email: "student@gmail.com",
+        role: "Student"
+    };
+
+    // Save initial state setup directly to client storage
+    localStorage.setItem("user_session", JSON.stringify(userSession));
+
+    // Handle Login Trigger Click
+    loginTrigger.addEventListener('click', (event) => {
+        event.stopPropagation(); // Prevents immediate closing from the document click listener
+        
+        const currentSession = JSON.parse(localStorage.getItem("user_session"));
+
+        // 1. User is not logged in -> Redirect
+        if (!currentSession || !currentSession.isLoggedIn) {
+            event.preventDefault();
+            dropdownMenu.style.display = 'none';
+            
+            // Ternary operator to determine redirect destination
+            window.location.href = (currentSession && currentSession.hasAccount) ? "/login.html" : "/signup.html";
+            return;
+        }
+
+        // 2. User is logged in -> Populate data & Toggle Display under the trigger
+        event.preventDefault(); // Stop default link jump if it's an <a> tag
+        
+        // Ternary operators used to fall back to default values if data is missing
+        if (emailLi) emailLi.textContent = currentSession.email ? currentSession.email : "Guest User";
+        if (roleLi) roleLi.textContent = currentSession.role ? currentSession.role : "Member";
+
+        // Toggle display block / none
+        const isDisplayed = dropdownMenu.style.display === 'block';
+        dropdownMenu.style.display = isDisplayed ? 'none' : 'block';
+    });
+
+    // Sign out action
+    if (signOutBtn) {
+        signOutBtn.addEventListener('click', (event) => {
+            event.stopPropagation();
+            const currentSession = JSON.parse(localStorage.getItem("user_session"));
+            if (currentSession) {
+                currentSession.isLoggedIn = false;
+                localStorage.setItem("user_session", JSON.stringify(currentSession));
+            }
+            dropdownMenu.style.display = 'none';
+            window.location.reload();
+        });
+    }
+
+    // Click anywhere outside or inside to close dropdown control
+    document.addEventListener('click', (event) => {
+        // Close dropdown when clicking completely outside the auth container
+        if (authContainer && !authContainer.contains(event.target)) {
+            dropdownMenu.style.display = 'none';
+        }
+    });
+
+  // ===================================== Navbar and header part================================================
+    const navBarList = document.querySelector('.navBar-container ul');
+    let activeLi = null;
+
+    if (navBarList) {
+        // Find the first list item ('About') to make it active by default
+        const firstTab = navBarList.querySelector('li');
+        if (firstTab) {
+            activeLi = firstTab;
+            activeLi.classList.add('active'); 
+        }
+
+        // Listen for clicks on all tab items
+        navBarList.addEventListener('click', (event) => {
+            const clickedLi = event.target.closest('li');
+            
+            // Only execute if an actual list item was clicked
+            if (clickedLi) {
+                // Remove active status from the previous item
+                if (activeLi) {
+                    activeLi.classList.remove('active');
+                }
+                
+                // Set current item to active status
+                activeLi = clickedLi;
+                activeLi.classList.add('active');
+            }
+        });
+    }
+
+    // -------------------------------searchbar icon-----------------------------
+    const searchIcon = document.getElementById('searchIcon');
+    const searchDropdown = document.getElementById('searchbardropdown');
+    const searchInput = document.getElementById('search');
+
+    if (searchIcon && searchDropdown) {
+        searchIcon.addEventListener('click', (event) => {
+            event.stopPropagation(); // Prevents instant closing
+            searchDropdown.classList.toggle('active');
+            
+            // Automatically focus inside the input bar when it slides into view
+            if (searchDropdown.classList.contains('active') && searchInput) {
+                searchInput.focus();
+            }
+            
+            // Close the message dropdown if it is currently open
+            if (techLearnDropdown) {
+                techLearnDropdown.classList.remove('active');
+            }
+        });
+    }
+
+    // ---------------------------------techlearn btn dropdown logic-----------------------------------
+    const techLearnBtn = document.getElementById('techLearn-btn');
+    const techLearnDropdown = document.getElementById('dropdown-details');
+
+    if (techLearnBtn && techLearnDropdown) {
+        techLearnBtn.addEventListener('click', (event) => {
+            event.preventDefault(); // Stops the nested <a> anchor tag from reloading page
+            event.stopPropagation(); // Prevents instant closing
+            
+            techLearnDropdown.classList.toggle('active');
+            
+            // Close the search bar dropdown if it is currently open
+            if (searchDropdown) {
+                searchDropdown.classList.remove('active');
+            }
+        });
+    }
+
+    // -----------------------------overlay windows-------------------------------------------
+    document.addEventListener('click', () => {
+        if (searchDropdown) searchDropdown.classList.remove('active');
+        if (techLearnDropdown) techLearnDropdown.classList.remove('active');
+    });
+
+    
+    if (searchDropdown) {
+        searchDropdown.addEventListener('click', (event) => {
+            event.stopPropagation();
+        });
+    }
+});
+
+// -----------------------search error handler
+function clickEnter(event) {
+    if (event.key === "Enter") {
+        event.preventDefault(); 
+        const query = event.target.value.trim();
+        
+        if (query !== "") {
+            console.log("Searching for: " + query);
+               }
+    }
+}
+
 
 // *************************************************************************************
 
@@ -41,13 +223,6 @@ const searchBarDropdown = document.getElementById("searchbardropdown");
 searchIcon.addEventListener('click', () => {
   searchBarDropdown.classList.toggle('active');
 });
-
-// search input work with enter key and search for data inside the site and show result
-function clickEnter(event) {
-    if (event.key === 'Enter') {
-        searchData();
-    }
-}
 
 function searchData() {
     const searchData = document.getElementById('search').value;
@@ -425,114 +600,4 @@ document.addEventListener('DOMContentLoaded', (event) => {
     });
   });
 });
-
-// ---------- ----------- ----------- ----------- ----------- ----------- ------------
-// for admin edits part
-// logo function 
-function initializeLogo() {
-    const logo = localStorage.getItem("siteLogo");
-    if (logo) {
-        const logoImg = document.querySelector(".logo img");
-        if (logoImg) logoImg.src = logo;
-    }
-}
-
-// added courses by admin here
-function getCourses() {
-    return JSON.parse(localStorage.getItem("courses")) || [];
-}
-
-// Function to generate the HTML structure for a single course card (sub div)
-function createCourseCard(course) {
-    const card = document.createElement("div");
-    card.className = "sub"; 
-
-    card.setAttribute("data-id", course.id);
-    card.setAttribute("data-title", course.title);
-    card.setAttribute("data-image", course.image || './images/placeholder.jpg'); // Use a placeholder if image is missing
-    card.setAttribute("data-price", `$${course.price}`);
-
-    card.innerHTML = `
-        <img src="${course.image || './images/placeholder.jpg'}" alt="${course.title}">
-        <h4>${course.title}</h4>
-        <div class="enroll-btn">
-            <p>$${course.price}</p>
-            <button class="enrolled-btn">Enroll</button>
-        </div>
-    `;
-    return card;
-}
-
-// enrollemnet btn of courses
-function renderAdminCourses() {
-    const targetContainer = document.querySelector(".subjects.first"); 
-    
-    if (!targetContainer) {
-        console.error("Target container not found for admin courses.");
-        return;
-    }
-
-    const courses = getCourses();
-
-    if (courses.length === 0) {
-  return;
-    }
-
-    courses.forEach(course => {
-        const card = createCourseCard(course);
-        targetContainer.appendChild(card);
-    });
-}
-
-function enrollmentListeners() {
-   document.querySelectorAll('.sub').forEach(course => {
-      const enrollBtn = course.querySelector('.enrolled-btn');
-
-      if (!enrollBtn) return;
-
-      enrollBtn.addEventListener('click', () => {
-        if (!isLoggedIn()) {
-           window.location.href = "./register.html";
-          return;
-        }
-
-        const courseData = {
-          id: course.dataset.id || Date.now().toString(),
-          title: course.dataset.title || course.querySelector("h4")?.innerText,
-          image: course.dataset.image || course.querySelector("img")?.src,
-          price: course.dataset.price || ("free"),
-          progress: 2
-        };
-
-        if(!courseData.title || !courseData.image){
-          alert("course data missed!");
-            return;
-        }
-
-        let enrolledCourses = JSON.parse(localStorage.getItem("enrolledCourses")) || [];
-
-        // prevent duplicate enrollment
-        const alreadyEnrolled = enrolledCourses.some(c => c.id === courseData.id);
-        if (!alreadyEnrolled) {
-          enrolledCourses.push(courseData);
-          localStorage.setItem("enrolledCourses", JSON.stringify(enrolledCourses));
-        }
-
-        window.location.href = "./user.html";
-      });
-    });
-}
-
-// initialize
-document.addEventListener("DOMContentLoaded", () => {
-
-  renderAdminCourses();
-  enrollmentListeners();
-});
-
-
-
-
-
-
 

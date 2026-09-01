@@ -375,3 +375,113 @@ window.renderTrash = renderTrash;
 window.restoreCourse = restoreCourse;
 window.permanentlyDeleteCourse = permanentlyDeleteCourse;
 
+// ---------- ----------- ----------- ----------- ----------- ----------- ------------
+// for admin edits part
+// logo function 
+function initializeLogo() {
+    const logo = localStorage.getItem("siteLogo");
+    if (logo) {
+        const logoImg = document.querySelector(".logo img");
+        if (logoImg) logoImg.src = logo;
+    }
+}
+
+// added courses by admin here
+function getCourses() {
+    return JSON.parse(localStorage.getItem("courses")) || [];
+}
+
+// Function to generate the HTML structure for a single course card (sub div)
+function createCourseCard(course) {
+    const card = document.createElement("div");
+    card.className = "sub"; 
+
+    card.setAttribute("data-id", course.id);
+    card.setAttribute("data-title", course.title);
+    card.setAttribute("data-image", course.image || './images/placeholder.jpg'); // Use a placeholder if image is missing
+    card.setAttribute("data-price", `$${course.price}`);
+
+    card.innerHTML = `
+        <img src="${course.image || './images/placeholder.jpg'}" alt="${course.title}">
+        <h4>${course.title}</h4>
+        <div class="enroll-btn">
+            <p>$${course.price}</p>
+            <button class="enrolled-btn">Enroll</button>
+        </div>
+    `;
+    return card;
+}
+
+// enrollemnet btn of courses
+function renderAdminCourses() {
+    const targetContainer = document.querySelector(".subjects.first"); 
+    
+    if (!targetContainer) {
+        console.error("Target container not found for admin courses.");
+        return;
+    }
+
+    const courses = getCourses();
+
+    if (courses.length === 0) {
+  return;
+    }
+
+    courses.forEach(course => {
+        const card = createCourseCard(course);
+        targetContainer.appendChild(card);
+    });
+}
+
+function enrollmentListeners() {
+   document.querySelectorAll('.sub').forEach(course => {
+      const enrollBtn = course.querySelector('.enrolled-btn');
+
+      if (!enrollBtn) return;
+
+      enrollBtn.addEventListener('click', () => {
+        if (!isLoggedIn()) {
+           window.location.href = "./register.html";
+          return;
+        }
+
+        const courseData = {
+          id: course.dataset.id || Date.now().toString(),
+          title: course.dataset.title || course.querySelector("h4")?.innerText,
+          image: course.dataset.image || course.querySelector("img")?.src,
+          price: course.dataset.price || ("free"),
+          progress: 2
+        };
+
+        if(!courseData.title || !courseData.image){
+          alert("course data missed!");
+            return;
+        }
+
+        let enrolledCourses = JSON.parse(localStorage.getItem("enrolledCourses")) || [];
+
+        // prevent duplicate enrollment
+        const alreadyEnrolled = enrolledCourses.some(c => c.id === courseData.id);
+        if (!alreadyEnrolled) {
+          enrolledCourses.push(courseData);
+          localStorage.setItem("enrolledCourses", JSON.stringify(enrolledCourses));
+        }
+
+        window.location.href = "./user.html";
+      });
+    });
+}
+
+// initialize
+document.addEventListener("DOMContentLoaded", () => {
+
+  renderAdminCourses();
+  enrollmentListeners();
+});
+
+
+
+
+
+
+

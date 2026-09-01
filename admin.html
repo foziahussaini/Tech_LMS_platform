@@ -6,6 +6,8 @@
     <title>TechLearn LMS</title>
     <link rel="stylesheet" href="./css/user.css">
     <link rel="stylesheet" href="./css/admin.css">
+    <script defer src="./JS/language.js"></script>
+    <script defer type="module" src="./JS/homepage.js"></script> 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
@@ -19,8 +21,9 @@
             </div>
         </div>
         <div class="header-container">
-            <div class="logo" id="logo">
-                <img src="./images/logo.lms.jpg" alt="">
+            <!-- logo part -->
+            <div class="logo-container">
+                <img id="logo" src="" alt="Brand Logo">
             </div>
             <div class="navBar">
                 <ul>
@@ -32,18 +35,8 @@
                     <li id="trash-btn">Trash</li>
                 </ul>
             </div>
-            <div class="login" id="login">
-                <i class="fa-regular fa-user fa-xs" style="margin-top: 0.7rem;"></i>
-                <span data-translate data-key="login" class="user">log in</span>
-            </div>
-            <div class="user-dropdown" id="user-dropdown">
-                <ul id="user">
-                    <li id="user-email">example@gmail.com</li>
-                    <hr style="color: rgba(128, 128, 128, 0.066);">
-                    <li id="user-role">Student</li>
-                    <button id="sign-out">sign out</button>
-                </ul>
-            </div>
+            <!-- auth login signUp -->
+            <div id="auth-container"></div>
         </div>
     </header>
     <main>

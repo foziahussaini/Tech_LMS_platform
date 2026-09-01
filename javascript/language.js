@@ -1,18 +1,15 @@
 document.addEventListener("DOMContentLoaded", () => {
-  // 1. Injisering tilpasset strukturen på den gjeldende siden
   injectLanguageSelector();
 
   const langText = document.getElementById("lang-text");
   const languageOptions = document.querySelectorAll("#language-option li");
   
-  // Finner riktig klikk-trigger avhengig av om det er index.html eller user.html
   const languageIcon = document.getElementById("language-icon") || document.getElementById("lang-text");
   const dropdownLang = document.querySelector(".dropdown-lang");
 
-  // 2. Funksjon for oversettelse via JSON-filer
   async function translatePage(lang) {
     try {
-      const response = await fetch(`./locales/${lang}.json`);
+      const response = await fetch(`./languages/${lang}.json`);
       if (!response.ok) throw new Error(`Kunne ikke laste inn oversettelse for: ${lang}`);
       
       const translations = await response.json();
@@ -26,15 +23,9 @@ document.addEventListener("DOMContentLoaded", () => {
         }
       });
 
-      // Retningsstyring (RTL for persisk og pashto)
-      if (lang === "fa" || lang === "ps") {
-        document.documentElement.dir = "rtl";
-      } else {
-        document.documentElement.dir = "ltr";
-      }
-
+      
     } catch (error) {
-      console.error("Oversettelsesfeil:", error);
+      console.error("", error);
     }
   }
 
@@ -82,7 +73,6 @@ function injectLanguageSelector() {
         <li data-lang="en">English</li>
         <li data-lang="fa">فارسی</li>
         <li data-lang="ps">پښتو</li>
-        <li data-lang="hi">Indian</li>
         <li data-lang="fr">Français</li>
         <li data-lang="de">Deutsch</li>
     </ul>
@@ -92,9 +82,10 @@ function injectLanguageSelector() {
   if (subHeader && !document.querySelector(".language")) {
     const langTrigger = document.createElement("div");
     langTrigger.className = "language";
+    langTrigger.style.marginRight = "-1.8rem";
     langTrigger.innerHTML = `
-      <span id="language-icon"><i class="fa-duotone fa-solid fa-earth-americas fa-s" style="--fa-primary-opacity: 0.4; --fa-secondary-opacity: 1; margin-top: 0.2rem;"></i></span>
-      <span data-translate class="lang" id="lang-text">EN</span> 
+      <span id="language-icon"><i class="fa-duotone fa-solid fa-earth-americas fa-s" style="--fa-primary-opacity: 0.4; --fa-secondary-opacity: 1; margin-top: 0.6rem;"></i></span>
+      <span data-translate class="lang" id="lang-text" style="font-weight: bold; font-size: 0.9rem;">EN</span> 
     `;
 
     const langDropdown = document.createElement("div");
@@ -105,7 +96,8 @@ function injectLanguageSelector() {
     subHeader.prepend(langDropdown);
     subHeader.prepend(langTrigger);
   } 
-  // Situasjon B: Siden har dashbord-profilen .profile (Feks. user.html)
+
+  // profile container for admin.html and other pages
   else if (profileContainer && !document.getElementById("lang-text")) {
     const langSpan = document.createElement("span");
     langSpan.className = "language-icon";

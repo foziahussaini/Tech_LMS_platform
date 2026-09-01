@@ -6,28 +6,19 @@
     <title>TechLearn LMS</title>
     <link  rel="stylesheet" href="./css/register.css">
     <link rel="stylesheet" href="./reponsive/loginForm.css">
-     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-</head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script defer src="./JS/register.js"></script>
+    <script defer src="./JS/language.js"></script>
+    <script defer type="module" src="./JS/homepage.js"></script> 
+    </head>
 <body>
     <div class="login-container">
         <div class="header">
-            <div class="logo" id="logo">
-                <img src="./images/logo.lms.jpg" alt="">
+            <!-- logo part -->
+            <<div class="logo-container">
+                <img id="logo" src="" alt="Brand Logo">
             </div>
-            <div class="lang">
-                <span id="language-icon"><i class="fa-duotone fa-solid fa-earth-americas fa-s" style="--fa-primary-opacity: 0.4; --fa-secondary-opacity: 1; margin-top: 0.2rem;"></i></span>
-                <span data-translate class="lang" id="lang-text">EN</span> 
-            </div>
-            <div class="dropdown-lang" id="dropdown-lang">
-                <ul id="language-option">
-                    <li  data-lang="en" value="en">English</li>
-                    <li  data-lang="fa" value="fa">فارسی</li>
-                    <li  data-lang="ps" value="ps">پښتو</li>
-                    <li  data-lang="hi" value="hi">Indian</li>
-                    <li  data-lang="fr" value="fr">Français</li>
-                    <li  data-lang="de" value="de">Deutsch</li>
-                </ul>
-            </div>
+            <!-- language part apend here -->
         </div>
         <div class="form-container">
             <div class="name" style="display: flex; flex-direction: column; gap: 0.6rem;">
@@ -82,6 +73,5 @@
             <button class="btn" id="btn" type="submit" data-translate data-key="sign-up">Sign Up</button>
         </div>
     </div>
-    <script src="./JS/register.js"></script>
 </body>
 </html>

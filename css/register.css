@@ -7,13 +7,13 @@
 }
 
 :root{
-    --bg-color: rgba(108, 144, 144, 0.753);
+    --bg-color: #0b768ea4;
     --font-family:  'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    --box-shadow: 0 3px 5px rgba(0, 0, 0, 0.15);
-    --bg2-color: rgba(216, 219, 218, 0.74);
-    --btn-color: rgba(142, 116, 236, 0.701);
+    --box-shadow: 0 3px 5px #f1c0c02b;
+    --mainBackground-color: #bad4db7a;
+    --btn-color: rgba(151, 214, 159, 0.884);
     --border-radius: 0.3rem;
-    --color-hover: rgba(151, 189, 184, 0.877);
+     --color-hover: rgba(151, 202, 195, 0.984);
 }
 
 body{
